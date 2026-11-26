@@ -449,17 +449,19 @@ class MicActivity : MetadataActivity(),
             disablePause()
             disablePlay()
             enableRecord()
-        } else {
-            handlingMediaFile =
-                MediaFileHandler.renameFile(vaultFile, recordingName.text.toString())
-            handlingMediaFile!!.size = MediaFileHandler.getSize(vaultFile)
-            disablePause()
-            enablePlay()
-            enableRecord()
+             } else {
+         handlingMediaFile =
+             MediaFileHandler.renameFile(vaultFile, recordingName.text.toString())
+         val renamedFile = handlingMediaFile ?: vaultFile
+         renamedFile.size = MediaFileHandler.getSize(renamedFile)
+         disablePause()
+         enablePlay()
+         enableRecord()
 
-            // returnData();
-            onAddSuccess(vaultFile)
+         // returnData();
+         onAddSuccess(renamedFile)
         }
+        
         updateRecordingName()
     }
 
